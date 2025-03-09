@@ -240,9 +240,129 @@ int main()
 代码区:(共享的，只读的)        
 数据区(静态变量全局变量，常量，已初始化(data)，未初始化(bss))       
 
-运行之后：
+运行之后：      
 栈区:先进后出，编译器管理数据开辟和释放，容量有限     
-堆区：容量远远大于栈区，手动开辟和释放数据  ，malloc,free   
+堆区：容量远远大于栈区，手动开辟和释放数据  ，malloc,free    
+
+
+**栈区注意事项**    
+
+```c
+int* func()
+{
+	int a = 10;  //栈上创建的变量
+	return &a;
+}
+void test1()
+{
+	int* p = func();
+	//a早已经被释放，因此再去操作这块内存是非法操作。
+	printf("%d\n", *p);
+	printf("%d\n", *p);
+}
+int main()
+{
+	test1();
+	return 0;
+}
+```
+```c
+char* getstring()
+{
+	char str[] = "hello";
+	return str;
+}
+void test2()
+{
+	char* p = NULL;
+
+	p = getstring();
+
+	printf("p=%s\n", p);//乱码
+
+}
+int main()
+{
+	test2();
+	return 0;
+}
+```  
+1.不要返回局部变量的地址，因为局部变量在函数体执行完毕后会被释放
+
+
+**堆区使用**     
+```c
+
+int * getspace()
+{
+	int *p=malloc(sizeof(int) * 5);
+	if (p == NULL)
+	{
+		return NULL;
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		p[i] = 100 + i;
+	}
+	return p;
+}
+void test1()
+{
+	int* p = getspace();
+	for (int i = 0; i < 5; i++)
+	{
+		printf("%d\n", p[i]);
+	}
+}
+int main()
+{
+	test1();
+	system("pause");
+	return 0;
+}
+```
+
+**堆区注意事项**   
+1.如果给主调函数中一个空指针分配内存，在被调函数中，利用同级的指针是分配失败的      
+解决方法：利用高级指针修饰低级指针       
+```c
+void allocateSpace(char *p)
+{
+	char* tmp = malloc(100);
+	memset(tmp, 0, 100);
+	strcpy(tmp, "hello");
+	p = tmp;
+}
+void test2()
+{
+	char* p = NULL;
+	allocateSpace(p);
+	printf("p=%s", p);
+}
+
+void allocateSpace2(char** p)
+{
+	char* tmp = malloc(100);
+	memset(tmp, 0, 100);
+	strcpy(tmp, "hello");
+	*p = tmp;
+}
+
+void test3()
+{
+	char* p2 = NULL;
+	allocateSpace2(&p2);
+	printf("p2=%s", p2);
+}
+int main()
+{
+	test2();  //  p=(null)
+	printf("\n");  //p2=hello
+	test3();   
+	return 0;
+}
+
+```
 
 
 
