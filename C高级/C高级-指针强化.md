@@ -685,4 +685,197 @@ int main()
 ```   
 
 
-    
+**一级指针易错点**        
+1. 越界 char buf[3]="abc"
+2. 指针叠加会不断改变指针指向,释放指针出错，解决方法：利用临时指针
+3. 返回局部变量地址
+4. 同一块内存释放多次
+```c
+//指针叠加会不断改变指针指向
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void test1()
+{
+	char* p = malloc(sizeof(char) * 64);
+
+	char* pp = p;
+
+	for (int i = 0; i < 10; i++)
+	{
+		*pp = i + 97;
+		printf("%c\n", *pp);  //%c ASCII码值对应的字符
+		pp++;
+	}
+	if (p != NULL)
+	{
+		free(p);
+		p = NULL;
+	}
+}
+
+
+int main()
+{
+	test1();
+
+	return 0;
+}
+```
+
+**const的使用场景**       
+1. 可以通过地址传递节省空间
+2. 加入const修饰函数中的形参 防止误操作
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Person
+{
+	char name[64];
+	int age;
+	int Id;
+	double score;
+
+};
+//打印学生信息
+//可以通过地址传递节省空间
+//加入const修饰函数中的形参 防止误操作
+void printPerson(const struct Person* p)
+{
+	//p->age = 100;  加上const不可修改
+	printf("姓名：%s 年龄： %d  Id：%d  分数：%f\n", p->name, p->age, p->Id, p->score);
+}
+void test1()
+{
+	struct Person p1 = { "tom",18,1,60 };
+
+	printPerson(&p1);
+}
+int main()
+{
+	
+	test1();
+
+	return 0;
+}
+```  
+
+**二级指针做函数参数的输入输出特性**     
+1. 输入特性：主调函数分配内存，被调函数使用
+	1. 在堆区开辟空间
+	2. 在栈区开辟空间
+2. 输出特性：被调函数分配内存，主调函数使用
+	1.
+```c
+//二级指针的输入特性
+
+void printArray(int ** pArray,int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		printf("%d\n", *pArray[i]);
+	}
+}
+//在堆区开辟内存
+void test1()
+{
+	int** pArray = malloc(sizeof(int*) * 5);
+
+	//在栈上开辟数据
+	int a1 = 100;
+	int a2 = 200;
+	int a3 = 300;
+	int a4 = 400;
+	int a5 = 500;
+
+	//堆区数组维护栈上数据的地址，建立关系
+	pArray[0] = &a1;
+	pArray[1] = &a2;
+	pArray[2] = &a3;
+	pArray[3] = &a4;
+	pArray[4] = &a5;
+
+	//打印输出
+	printArray(pArray,5);
+}
+
+//在栈上开辟内存
+void test2()
+{
+	int* pArray[5];
+	for (int i = 0; i < 5; i++)
+	{
+		pArray[i]=malloc(4);  //栈上每个数据 维护 堆区开辟空间
+		*(pArray[i]) = i + 100;
+	}
+	printArray(pArray,5);
+	//堆区数据释放
+	for (int i = 0; i < 5; i++)
+	{
+		if (pArray != NULL)
+		{
+			free(pArray[i]);
+			pArray[i] = NULL;
+		}
+	}
+}
+int main()
+{
+	//test1();
+	test2();
+	return 0;
+}
+
+
+
+
+//二级指针做函数的输出特性
+void allocatespace(int ** pp)
+{
+	int* pArray = malloc(sizeof(int) * 10);
+	for (int i = 0; i < 10; i++)
+	{
+		pArray[i] = 100 + i;
+	}
+	*pp = pArray;
+}
+void printArray2(int **arr,int len)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		printf("%d\n",(* arr)[i]);
+	}
+}
+void freeSpace(int *p)
+{
+	if (p != NULL)
+	{
+		free(p);
+		p = NULL;
+	}
+}
+void test3()
+{
+	int* p = NULL;
+	allocatespace(&p);
+	printArray2(&p,10);
+
+	//释放堆区数据
+	freeSpace(p);  //还是野指针
+	p = NULL;
+}
+int main()
+{
+	//test1();
+	//test2();
+	test3();
+
+	return 0;
+}
+```
+
