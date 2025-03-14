@@ -487,3 +487,202 @@ int main()
 ```
 
 
+**sscanf的使用**     
+1.跳过数据       
+%*s 或 %*d  
+```c
+void test1()
+{
+	char* str = "12345abcde";
+
+	char buf[1024] = { 0 };
+
+	sscanf(str, "%*d%s", buf);
+
+	printf("buf=%s\n", buf);     // buf=abcde
+}
+
+void test2()
+{
+	char* str = "abcde 12345";  //忽略到 空格 或 \t 会结束
+
+	char buf[1024] = { 0 };
+
+	//sscanf(str, "%*s%s", buf);
+	sscanf(str, "%*[a-z]%s", buf);
+
+	printf("buf=%s\n", buf);     // buf=12345
+}
+int main()
+{
+	test1();
+	test2();
+	return 0;
+}
+```       
+2.读取指定宽度   
+%[width]s
+```c
+void test3()
+{
+	char* str = "abcde12345";
+
+	char buf[1024] = { 0 };
+
+	sscanf(str, "%6s", buf);
+
+	printf("%s\n", buf);   //abcde1
+}
+
+int main()
+{
+	test3();
+
+	return 0;
+}
+```     
+3.匹配a到z中任意字符（尽可能多的匹配）         
+%[a-z]
+```c
+void test4()
+{
+	char* str = "12345abcde";
+
+	char buf[1024] = { 0 };
+
+	sscanf(str, "%*d%[a-z]", buf);
+
+	printf("%s\n", buf);   //abcde
+}
+
+int main()
+{
+	test4();
+
+	return 0;
+}
+```  
+
+4.匹配a,B,c中一员，贪婪性       
+%[aBc],如果遇到匹配失败，后续不再匹配               
+```c
+void test5()
+{
+	char* str = "aabcdef12345";
+
+	char buf[1024] = { 0 };
+
+	sscanf(str, "%[abc]", buf);
+
+	printf("%s\n", buf);   //aabc
+}
+int main()
+{
+	test5();
+
+	return 0;
+}
+```
+5.匹配非a的任意字符          
+%[^a],如果遇到匹配失败，后续不再匹配               
+```c
+void test6()
+{
+	char* str = "sgsraabcdef12345";
+
+	char buf[1024] = { 0 };
+
+	sscanf(str, "%[^a]", buf);
+
+	printf("%s\n", buf);   //sgar
+}
+int main()
+{
+	test6();
+
+	return 0;
+}
+```
+6.读取除a-z以外的所有字符         
+%[^a-z]
+```c
+void test7()
+{
+	char* str = "sgsraabcdef12345";
+
+	char buf[1024] = { 0 };
+
+	sscanf(str, "%[^0-9]", buf);
+
+	printf("%s\n", buf);  //sgsraabcdef
+}
+int main()
+{
+	test7();
+
+	return 0;
+}
+```
+
+**练习**  
+1.   
+```c
+void test8()
+{
+	char *ip="127.0.0.1";
+	int num1,num2,num3,num4;
+	sscanf(ip,"%d.%d.%d.%d",&num1,&num2,&num3,&num4);
+
+	printf("num1=%d\n",num1);
+	printf("num2=%d\n",num3);
+	printf("num3=%d\n",num3);
+	printf("num4=%d\n",num4);
+}
+
+int main()
+{
+	test8();
+	return 0;
+}
+//运行结果：
+// num1=127
+// num2=0
+// num3=0
+// num4=1
+```
+2.
+```c
+void test9()
+{
+	char* str = "abcde#zhangtao@1324234";
+	char buf[1024] = { 0 };
+	sscanf(str, "%*[^#]#%[^@]", buf);
+	printf("buf=%s\n", buf);
+}
+
+int main()
+{
+	test9();
+	return 0;
+}
+```  
+```c
+void test10()
+{
+	char* str = "abcdezhangtao@rjed.cn";
+	char buf1[1024] = { 0 };
+	char buf2[1024] = { 0 };
+	sscanf(str, "%[a-z]", buf1);
+	sscanf(str, "%*[^@]@%s", buf2);
+	printf("buf=%s\n", buf1);
+	printf("buf=%s\n", buf2);
+}
+int main()
+{
+	test10();
+	return 0;
+}
+```   
+
+
+    
