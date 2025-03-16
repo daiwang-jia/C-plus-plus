@@ -968,5 +968,227 @@ int main()
 }
 ```
 
+**一维数组的数组名**   
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+void test1()
+{
+	int arr[] = { 1,2,3,4,5 };
+	printf("sizeof arr=%d\n", sizeof(arr));  // 20
+
+	//对数组名取地址
+	printf("%d\n", &arr);
+	printf("%d\n", &arr + 1);//隔20
+
+	//第一种  对数组名 sizeof
+	//第二种  对数组名取地址 步长  整个数组长度
+	//除了这两个情况以外，一维数组名指向第一个元素的指针
+
+	int* p = arr;
+
+	//数组名  指针常量
+	//int * const p  指针常量，指针的指向不可以修改   arr=NULL;不行     arr[0]=100;可以
+	//const int *p   常量指针
+
+	//数组访问时候下标可以为负数
+	p = p + 3;
+	printf("%d\n", p[-1]);  //给人看  3
+	printf("%d\n", *(p - 1));  //给机器看   3
+}
+
+void printarray(int *arr/*int arr[]*/,int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		printf("%d ", arr[i]);
+		printf("%d ", *(arr+i));
+	}
+}
+void test2()
+{
+	int arr[] = { 1,2,3,4,5 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	printarray(arr,len);
+}
+
+int main()
+{
+	//test1();
+	test2();
+
+	return 0;
+}
+```
+
+**数组指针定义**    
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+//1.先定义数组的类型 再通过类型定义数组指针
+void test1()
+{
+	int arr[5] = { 1,2,3,4,5 };
+
+	typedef int(ARRAY_TYPE)[5];  //ARRAY_TYPE是一个有5个int元素的数组的类型
+
+	ARRAY_TYPE* arrP = &arr;
+	//*appP=arr
+	for (int i = 0; i < 5; i++)
+	{
+		printf("%d\n", (*arrP)[i]);
+	}
+
+}
+//2.先定义数组指针的类型，再通过类型创建数组指针变量
+void test2()
+{
+	int arr[5] = { 1,2,3,4,5 };
+
+	typedef int(*ARRAY_TYPE)[5];
+
+	ARRAY_TYPE arrp = &arr;
+
+	for (int i = 0; i < 5; i++)
+	{
+		printf("%d\n", (*arrp)[i]);
+
+	}
+
+}
+
+//3.直接定义数组指针变量
+void test3()
+{
+	int arr[5] = { 1,2,3,4,5 };
+
+	//语法：数组元素类型（*数组指针变量名称）[元素个数]
+	int(* p)[5] = &arr;
+
+
+	for (int i = 0; i < 5; i++)
+	{
+		printf("%d\n", (*p)[i]);
+
+	}
+}
+int main()
+{
+	test3();
+	return 0;
+}
+```  
+
+
+**指针数组**   
+指针数组排序      
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+//指针数组--数组中的每个元素都是指针
+//选择排序
+void mysort(int arr[],int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		int min = i;
+		for (int j = i + 1; j < len; j++)
+		{
+			if (arr[min] > arr[j])
+			{
+				min = j;
+			}
+		}
+		if (i != min)
+		{
+			int tmp = arr[i];
+			arr[i] = arr[min];
+			arr[min] = tmp;
+		}
+	}
+}
+void printarray(int arr[], int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+}
+void test1()
+{
+	//选择排序，从小到大
+	int arr[] = { 3,5,1,2,4 };
+
+	//封装选择排序算法
+	int len = sizeof(arr) / sizeof(int);
+	mysort(arr,len);
+
+	//打印数组
+	printarray(arr, len);
+}
+
+
+
+
+void selectsort(char* parray[], int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		int min = i;
+		for (int j = i + 1; j < len; j++)
+		{
+			//if (parray[min] > parray[j])
+			if((strcmp(parray[min] ,parray[j]))>0)   //比较字符串大小
+			{
+				min = j;
+			}
+		}
+		if (i != min)
+		{
+			char* tmp = parray[i];
+			parray[i] = parray[min];
+			parray[min] = tmp;
+		}
+	}
+}
+
+void printarray2(char* parray[], int len)
+{
+	for (int i = len-1; i >= 0; i--)
+	{
+		printf("%s ", parray[i]);
+	}
+}
+void test2()
+{
+	char* parray[] = { "aaa","bbb","ccc","ddd","fff","eee", };
+
+	//fff  eee ddd ccc bbb aaa  降序排列,利用选择排序算法
+
+	//选择排序
+	int len = sizeof(parray) / sizeof(parray[0]);
+	selectsort(parray, len);
+
+	// 打印数组
+	printarray2(parray, len);
+}
+int main()
+{
+	test1();
+	printf("\n");
+	test2();
+	return 0;
+}
+```
 
 
