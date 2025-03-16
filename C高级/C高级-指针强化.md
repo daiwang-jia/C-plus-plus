@@ -770,7 +770,7 @@ int main()
 	1. 在堆区开辟空间
 	2. 在栈区开辟空间
 2. 输出特性：被调函数分配内存，主调函数使用
-	1.
+
 ```c
 //二级指针的输入特性
 
@@ -878,4 +878,95 @@ int main()
 	return 0;
 }
 ```
+
+**位运算**    
+```c
+//按位取反  ~
+//0变1，1变0
+void test1()
+{
+	int num = 2;
+	printf("~num=%d\n", ~num);
+}
+
+//按位与  &
+//同真为真，只有都为1是才为1
+void test2()
+{
+	int num = 0;
+	scanf("%d", &num);
+	if ((num & 1) == 0)
+	{
+		printf("%d是偶数\n",num);
+	}
+	else
+	{
+		printf("%d是奇数\n",num);
+	}
+}
+
+//按位或  |
+//同假为假，有1即是1
+void test3()
+{
+	int num1 = 5;
+	int num2 = 3;
+	printf("num1 | num2=%d\n", num1 | num2);
+}
+
+//位异或  ^
+//不同为1，同为0
+void test4()
+{
+	int num1 = 5;
+	int num2 = 9;
+
+	//实现两个数字的交换
+	/*num1 = num1 ^ num2;
+	num2 = num1 ^ num2;
+	num1 = num1 ^ num2;*/
+
+	num1 = num1 + num2;
+	num2 = num1 - num2;
+	num1 = num1 - num2;
+
+	printf("num1=%d\n", num1);
+	printf("num2=%d\n", num2);
+}
+int main()
+{
+	//test1();
+	//test2();
+	//test3();
+	test4();
+	return 0;
+}
+```  
+
+**移位运算符**    
+1. number << n    number乘以2的n次幂
+2. number >> n    number（非负）除以2的n次幂 如果是正数，0填充高位，负数要根据其机器
+```c
+
+//左移
+void test1()
+{
+	int num = 20;
+	printf("%d\n", num << 3);  //num=num*(2^3)160
+}
+
+//右移
+void test2()
+{
+	int num = 20;
+	printf("%d\n", num >> 1);  //num=num/(2^1)  2
+}
+int main()
+{
+	test2();
+	return 0;
+}
+```
+
+
 
