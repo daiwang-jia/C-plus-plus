@@ -326,7 +326,7 @@ int main()
 }
 ```
 
-## 内存申请和释放     
+## 内存的申请与释放         
 ```c++
 #include <iostream>
 #include <string>
