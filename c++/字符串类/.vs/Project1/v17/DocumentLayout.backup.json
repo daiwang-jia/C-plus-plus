@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\a1956\\Desktop\\C-test\\Project1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B47A80C1-EFE2-4A6E-9C71-A55E0D7A94D9}|Project1\\Project1.vcxproj|C:\\Users\\a1956\\Desktop\\C-test\\Project1\\Project1\\MyString.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B47A80C1-EFE2-4A6E-9C71-A55E0D7A94D9}|Project1\\Project1.vcxproj|solutionrelative:Project1\\MyString.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B47A80C1-EFE2-4A6E-9C71-A55E0D7A94D9}|Project1\\Project1.vcxproj|C:\\Users\\a1956\\Desktop\\C-test\\Project1\\Project1\\test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B47A80C1-EFE2-4A6E-9C71-A55E0D7A94D9}|Project1\\Project1.vcxproj|solutionrelative:Project1\\test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B47A80C1-EFE2-4A6E-9C71-A55E0D7A94D9}|Project1\\Project1.vcxproj|C:\\Users\\a1956\\Desktop\\C-test\\Project1\\Project1\\MyString.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B47A80C1-EFE2-4A6E-9C71-A55E0D7A94D9}|Project1\\Project1.vcxproj|solutionrelative:Project1\\MyString.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 735,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MyString.cpp",
+              "DocumentMoniker": "C:\\Users\\a1956\\Desktop\\C-test\\Project1\\Project1\\MyString.cpp",
+              "RelativeDocumentMoniker": "Project1\\MyString.cpp",
+              "ToolTip": "C:\\Users\\a1956\\Desktop\\C-test\\Project1\\Project1\\MyString.cpp",
+              "RelativeToolTip": "Project1\\MyString.cpp",
+              "ViewState": "AgIAAJ8AAAAAAAAAAAAAAJMAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-30T12:31:07.031Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MyString.h",
+              "DocumentMoniker": "C:\\Users\\a1956\\Desktop\\C-test\\Project1\\Project1\\MyString.h",
+              "RelativeDocumentMoniker": "Project1\\MyString.h",
+              "ToolTip": "C:\\Users\\a1956\\Desktop\\C-test\\Project1\\Project1\\MyString.h",
+              "RelativeToolTip": "Project1\\MyString.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-30T12:30:46.966Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "test.cpp",
+              "DocumentMoniker": "C:\\Users\\a1956\\Desktop\\C-test\\Project1\\Project1\\test.cpp",
+              "RelativeDocumentMoniker": "Project1\\test.cpp",
+              "ToolTip": "C:\\Users\\a1956\\Desktop\\C-test\\Project1\\Project1\\test.cpp",
+              "RelativeToolTip": "Project1\\test.cpp",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACMAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-30T11:12:57.568Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
