@@ -56,6 +56,7 @@ T Stack<T>::pop()
 	Node* temp = head;
 	head = head->next;
 	delete temp;
+	--size;
 	return result;
 }
 
