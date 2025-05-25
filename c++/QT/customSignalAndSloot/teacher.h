@@ -12,6 +12,7 @@ public:
 signals:
     //自定义信号
     void hungry();
+    void hungry(QString what);
 
 public slots:
 };

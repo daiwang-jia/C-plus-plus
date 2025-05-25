@@ -14,6 +14,7 @@ signals:
 public slots:
     //自定义槽
     void treat();
+    void treat(QString what);
 };
 
 #endif // STUDENT_H
