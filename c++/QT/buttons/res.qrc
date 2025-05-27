@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Nitro/3d-shapes-abstract-lines-4k-nh.jpg</file>
+        <file>Nitro/2025-05-26 150125.png</file>
+        <file>Nitro/a-mountain-church-at-sunrise-ev-3840x2160.jpg</file>
+        <file>Nitro/nebula-milky-way-astronomy-n1.jpg</file>
+        <file>Nitro/Nitro_Wallpaper_01_3840x2400.jpg</file>
+        <file>Nitro/Nitro_Wallpaper_02_3840x2400.jpg</file>
+        <file>Nitro/Nitro_Wallpaper_03_3840x2400.jpg</file>
+    </qresource>
+</RCC>
